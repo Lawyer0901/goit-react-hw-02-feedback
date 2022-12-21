@@ -8,17 +8,19 @@ export const Button = styled.button`
   font-weight: 500;
   border: ${p => p.theme.borders.none};
   border-radius: ${p => p.theme.radii.md};
+  display: block;
   cursor: pointer;
   text-transform: capitalize;
   transition: transform 250ms linear, background-color 250ms linear;
-  :first-child {
-    margin-left: auto;
-  }
-  :last-child {
-    margin-right: auto;
-  }
+
   :hover {
     transform: scale(1.1);
     background-color: ${p => p.theme.colors.accent};
   }
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  gap: 20px;
+  padding: 15px;
 `;

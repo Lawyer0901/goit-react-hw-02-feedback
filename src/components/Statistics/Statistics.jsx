@@ -1,9 +1,13 @@
+import { StatisticsContainer } from './Statistics.styled';
+
 export function Statistics({ good, neutral, bad, total, positivePercentage }) {
-  <div>
-    <p>{good}</p>
-    <p>{neutral}</p>
-    <p>{bad}</p>
-    <p>{total}</p>
-    <p>{positivePercentage}</p>
-  </div>;
+  return (
+    <StatisticsContainer>
+      <p>Good: {good}</p>
+      <p>Neutral: {neutral}</p>
+      <p>Bad: {bad}</p>
+      <p>Total: {total}</p>
+      <p>Positive Feedback: {positivePercentage}</p>
+    </StatisticsContainer>
+  );
 }
