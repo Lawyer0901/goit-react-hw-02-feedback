@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Section } from './Section/Section';
 import { FeedbackOptions } from './FeedbackOptions/FeedbackOptions';
 import { Statistics } from './Statistics/Statistics';
+import { NoFeedbackMassage } from './NoFeedbackMassage/NoFeedbackMassage';
 
 export class App extends Component {
   state = {
@@ -17,10 +18,31 @@ export class App extends Component {
       [key]: prevState[key] + 1,
     }));
   };
-  // countTotalFeedback()
+  countTotalFeedback = () => {
+    const total = Object.values(this.state).reduce((acc, el) => {
+      acc += el;
+      return acc;
+    }, 0);
 
-  // countPositiveFeedbackPercentage()
+    if (total) {
+      return total;
+    }
+  };
 
+  countPositiveFeedbackPercentage = () => {
+    const total = this.countTotalFeedback();
+    // console.log(total);
+    const possitiveValue = [this.state].reduce((acc, el) => {
+      acc += el['good'];
+      return acc;
+    }, 0);
+
+    const result = (possitiveValue / total) * 100;
+    if (!result) {
+      return this.state.good;
+    }
+    return Math.round(result);
+  };
   render() {
     const { good, bad, neutral } = this.state;
     return (
@@ -32,13 +54,17 @@ export class App extends Component {
           />
         </Section>
         <Section title={'Statistic'}>
-          <Statistics
-            good={good}
-            bad={bad}
-            neutral={neutral}
-            total={this.countTotalFeedback}
-            positivePercentage={this.countPositiveFeedbackPercentage}
-          />
+          {this.countTotalFeedback() ? (
+            <Statistics
+              good={good}
+              bad={bad}
+              neutral={neutral}
+              total={this.countTotalFeedback()}
+              positivePercentage={this.countPositiveFeedbackPercentage()}
+            />
+          ) : (
+            <NoFeedbackMassage />
+          )}
         </Section>
       </>
     );
