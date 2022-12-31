@@ -63,7 +63,7 @@ export class App extends Component {
               positivePercentage={this.countPositiveFeedbackPercentage()}
             />
           ) : (
-            <NoFeedbackMassage />
+            <NoFeedbackMassage text={'There is no feedback'} />
           )}
         </Section>
       </>
